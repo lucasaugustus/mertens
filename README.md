@@ -7,3 +7,5 @@ Their original C++ code is available at https://arxiv.org/abs/2101.08773.  The p
 3.  Translate it line-by-line directly into Python3.  There are some hiccups here related to pointer arithmetic and negative arguments in the division and remainder operations.
 4.  In some cases where a function is invoked only once, inline that function.
 5.  Make some further changes so that it plays more nicely with the interpreter, such as splitting the compound data types into multiple non-compound types.
+
+At some future point, I will attempt to put the parallelism back in, but for now, this is a single-threaded program.
