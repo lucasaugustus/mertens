@@ -4,7 +4,6 @@
 # See https://arxiv.org/abs/2101.08773 for details.
 # This file is a translation of the ancillary files from that link.
 
-from labmath import introot
 from math import isqrt
 from time import time
 from sys import argv
@@ -15,6 +14,41 @@ def sgn(x): return (x > 0) - (x < 0)
 def ceildiv(a, b): return -(a // -b)
 def modl(a, b): return (a % abs(b)) if a >= 0 else (b - 1 - (-a-1)%abs(b))
 def FlCong(n, a, q): return n - ((n-a) % abs(q))
+
+def introot(n, r=2):    # copied from labmath (https://pypi.org/project/labmath/ or https://github.com/lucasaugustus/labmath)
+    """
+    Returns the rth root of n, rounded to the nearest integer in the
+    direction of zero.  Returns None if r is even and n is negative.
+    
+    Input:
+        n -- an integer
+        r -- a natural number or None
+    
+    Output: An integer
+    
+    Examples:
+    
+    >>> [introot(-729, 3), introot(-728, 3)]
+    [-9, -8]
+    
+    >>> [introot(1023, 2), introot(1024, 2)]
+    [31, 32]
+    """
+    if n < 0: return None if r%2 == 0 else -introot(-n, r)
+    if n < 2: return n
+    if r == 1: return n
+    if r == 2: return isqrt(n)
+    #if r % 2 == 0: return introot(isqrt(n), r//2)      # TODO Check validity of this line.
+    lower = upper = 1 << (n.bit_length() // r)
+    while lower ** r >  n: lower >>= 2
+    while upper ** r <= n: upper <<= 2
+    while lower != upper - 1:
+        mid = (lower + upper) // 2
+        m = mid**r
+        if   m == n: return  mid
+        elif m <  n: lower = mid
+        elif m >  n: upper = mid
+    return lower
 
 def fillisprime(isprime, n):
     # Given a list isprime and an int n, we fill isprime with 0s and 1s so that isprime[n] == 1 iff n is prime.
