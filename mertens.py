@@ -15,7 +15,7 @@ def ceildiv(a, b): return -(a // -b)
 def modl(a, b): return (a % abs(b)) if a >= 0 else (b - 1 - (-a-1)%abs(b))
 def FlCong(n, a, q): return n - ((n-a) % abs(q))
 
-def introot(n, r=2):    # copied from labmath (https://pypi.org/project/labmath/ or https://github.com/lucasaugustus/labmath)
+def introot(n, r=2):    # copied from labmath (https://pypi.org/project/labmath or https://github.com/lucasaugustus/labmath)
     """
     Returns the rth root of n, rounded to the nearest integer in the
     direction of zero.  Returns None if r is even and n is negative.
